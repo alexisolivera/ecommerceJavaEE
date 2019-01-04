@@ -1,8 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 12-Febrero-2018, 10:24:59
-    Author     : Christian Camilo Gámez
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Inicio |  Crea e-Commerce JAVA EE con pagos Online Paypal y Payu</title>
+    <title>Inicio |  e-Commerce desarrollado por Alexis Olivera</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -40,8 +35,8 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i> info@e-shopper.com</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i> +*******</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> haolivera92@gmail.com</a></li>
 							</ul>
 						</div>
 					</div>
@@ -71,10 +66,11 @@
 						<div class="btn-group pull-right">
 							<div class="btn-group">
 								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									$ Pesos Mexicanos (MXN)
+									$ Pesos Argentinos (ARG)
 									<span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu">
+                                                                        <li><a href="#">Pesos Argentinos (ARG)</a></li>
 									<li><a href="#">Pesos Mexicanos (MXN)</a></li>
 									<li><a href="#">Pesos Colombianos (COP)</a></li>
                                                                         
@@ -155,8 +151,6 @@
 							<div class="item active">
 								<div class="col-sm-6">
 									<h1><span>E</span>-SHOPPER</h1>
-									<h3>Crea e-Commerce JAVA EE, JSP con pagos Online Paypal y Payu</h3>
-									<p>Aprende a crear una tienda virtual con carrito de compras y pagos en línea con JSP, JAVA EE, AJAX, JavaScript y MySQL. </p>
 									<button type="button" class="btn btn-default get">Comprar ahora</button>
 								</div>
 								<div class="col-sm-6">
@@ -904,7 +898,7 @@
 					<div class="col-sm-2">
 						<div class="companyinfo">
 							<h2><span>e</span>-shopper</h2>
-							<p>Aprende a crear una tienda virtual con carrito de compras y pagos en línea con JSP, JAVA EE, AJAX, JavaScript y MySQL.</p>
+							<p></p>
 						</div>
 					</div>
 					<div class="col-sm-7">
@@ -1046,7 +1040,7 @@
 			<div class="container">
 				<div class="row">
 					<p class="pull-left">Copyright © 2019 . Todos los derechos reservados.</p>
-					<p class="pull-right">Curso diseñado por <span><a target="_blank" href="https://www.udemy.com/user/christian-gamez-2">Christian Camilo Gámez</a></span></p>
+					<p class="pull-right"><span>Desarrollado por Alexis Olivera</span></p>
 				</div>
 			</div>
 		</div>
