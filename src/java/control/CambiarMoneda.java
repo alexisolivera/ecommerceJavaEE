@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package control;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Alexis
  */
-public class Inicio extends HttpServlet {
+public class CambiarMoneda extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,14 +29,28 @@ public class Inicio extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession sesion = request.getSession();
-        if(sesion.getAttribute("moneda")==null){
-            sesion.setAttribute("moneda", "MXN");
-            sesion.setAttribute("nom_moneda", "$ Pesos Mexicanos");
+       HttpSession sesion = request.getSession();
+        if(request.getParameter("moneda")!=null){
+            switch (request.getParameter("moneda")){
+                case "COP":
+                    sesion.setAttribute("moneda", request.getParameter("moneda"));
+                    sesion.setAttribute("nom_moneda", "$ Pesos Colombianos");
+                    break;
+                case "USD":
+                    sesion.setAttribute("moneda", request.getParameter("moneda"));
+                    sesion.setAttribute("nom_moneda", "$ Dolar(USA)");
+                    break;
+                case "ARG":
+                    sesion.setAttribute("moneda", request.getParameter("moneda"));
+                    sesion.setAttribute("nom_moneda", "$ Pesos Argentinos");
+                    break;
+                default:
+                    sesion.setAttribute("moneda", ("MXN"));
+                    sesion.setAttribute("nom_moneda", "$ Pesos Mexicanos");
+                break;
+            }
         }
-        
-        request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
+        response.sendRedirect("Home");
         }
     
 
