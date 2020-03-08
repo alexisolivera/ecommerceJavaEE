@@ -3,6 +3,8 @@
     Created on : 18-ene-2019, 0:02:20
     Author     : Alexis
 --%>
+<%@page import="cad.MarcaCad"%>
+<%@page import="JavaBeans.Marca"%>
 <%@page import="cad.CategoriaCad"%>
 <%@page import="JavaBeans.Categoria"%>
 <%@page import="java.util.ArrayList"%>
@@ -27,26 +29,38 @@
 				</div>
 				<div class="col-sm-10 clearfix">
                                     <h3>Gestionar producto</h3>
-                                <form action="ControlProducto" method="post">
+                                    <form action="ControlProducto" enctype="multipart/form-data" method="post">
                                     <div class="form-one">
                                         Nombre:<input type="text" name="nombre" placeholder="Nombre Producto" value="" required />
+                                        <hr/>
                                         Precio:<input type="number" name="precio" placeholder="Precio" value="0" min="0" />
+                                        <hr/>
                                         Precio promo:<input type="number" name="precionuevo" placeholder="Precio" value="0" min="0" />
+                                        <hr/>
                                         Stock:<input type="number" name="cantidad" placeholder="Cantidad" value="1" min="1" />
+                                        <hr/>
                                         Marca:<select name="marca">
-                                            <option></option>
-                                            <option></option>
+                                            <option>Seleccionar Marca</option>
+                                            <% for (Marca m: MarcaCad.listarTodoDeMarcas()){%>
+                                            <option value="<%= m.getCodigo() %>"><%=m.getNombre()%></option>
+                                            <%}%>
                                         </select>
                                         Categoria:<select name="categoria">
-                                            <option></option>
-                                            <option></option>
+                                            <option>Seleccionar categoria</option>
+                                            <% for (Categoria c: CategoriaCad.listarTodoDeCategoria()){%>
+                                            <option value="<%= c.getCodigo() %>"><%=c.getNombre()%></option>
+                                            <%}%>
+                                                
                                         </select>
                                         Descripcion:<textarea name="descripcion" rows="4" cols="20" placeholder="Descripcion" required >
                                         </textarea>
-                                        Nuevo?<input type="checkbox" name="nuevo" value="ON" checked="checked" />
-                                        Recomendado?<input type="checkbox" name="recomendado" value="OFF" />
+                                        <hr/>
+                                        Nuevo?<input type="checkbox" name="nuevo" value="ON" checked="checked" style="margin-right: 10px"/>
+                                        Recomendado?<input type="checkbox" name="recomendado" value="OFF" style="margin-right: 10px"/>
                                         Visible?<input type="checkbox" name="visible" value="ON" checked="checked" />
+                                        <hr/>
                                         <input type="file" name="imagen" value="Seleccionar una imagen" required />
+                                        <hr/>
                                         <input class="btn btn-success" name="accion" type="submit" value="Registrar" />
                                         <input class="btn btn-default" name="accion" type="submit" value="Consultar" />
                                         <input class="btn btn-warning" name="accion" type="submit" value="Actualizar" />
