@@ -28,19 +28,27 @@ public class ProductoCad {
             sentencia.setFloat(2, producto.getPrecio());
             sentencia.setFloat(3, producto.getPrecionuevo());
             sentencia.setInt(4, producto.getStock());
-            sentencia.setString(1, producto.getNombre());
-            ResultSet resultado = sentencia.executeQuery();
-            ArrayList<Categoria> lista=new ArrayList<>();
-            while (resultado.next()) {                
-                Categoria cat=new Categoria();
-                cat.setCodigo(resultado.getInt("codigo"));
-                cat.setNombre(resultado.getString("nombre"));
-                lista.add(cat);
-            }
-            return true; //lista;
+            sentencia.setBoolean(5, producto.isNuevo());
+            sentencia.setBoolean(6, producto.isRecomendado());
+            sentencia.setString(7, producto.getDescripcion());
+            sentencia.setBoolean(8, producto.isVisible());
+            sentencia.setInt(9, producto.getCodigo_marca());
+            sentencia.setInt(10, producto.getCodigo_categoria());
+            sentencia.setString(11, producto.getImg());
+            
+            return sentencia.executeUpdate()>0;
+            
         } catch (SQLException ex) {
-            //TODO
+            return false;
         }
-        return false;
+        
     }
+    
+    /*
+ 
+p_visible boolean,
+p_codigo_marca int,
+p_codigo_categoria int,
+p_img varchar(100)
+    */
 }

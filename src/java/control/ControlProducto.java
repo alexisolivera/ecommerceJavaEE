@@ -6,6 +6,7 @@
 package control;
 
 import JavaBeans.ProductoTerminar;
+import cad.ProductoCad;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -81,20 +83,39 @@ public class ControlProducto extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        recibirDatos(request);
         
-        String url = subirImagen(request);
-        String nombre = request.getParameter("nombre");
-        float precio = Float.parseFloat(request.getParameter("precio"));
-        float precion = Float.parseFloat(request.getParameter("precionuevo"));
-        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-        int marca = Integer.parseInt(request.getParameter("marca"));
-        int categoria = Integer.parseInt(request.getParameter("categoria"));
-        String descripcion = request.getParameter("descripcion");
-        boolean nuevo= request.getParameter("nuevo").equalsIgnoreCase("on");
-        boolean recomendado= request.getParameter("recomendado").equalsIgnoreCase("on");
-        boolean visible= request.getParameter("visible").equalsIgnoreCase("on");
+        String url = request.getAttribute("imagen").toString();
+        String nombre = request.getAttribute("nombre").toString();
+        float precio = Float.parseFloat(request.getAttribute("precio").toString());
+        float precion = Float.parseFloat(request.getAttribute("precionuevo").toString());
+        int cantidad = Integer.parseInt(request.getAttribute("cantidad").toString());
+        int marca = Integer.parseInt(request.getAttribute("marca").toString());
+        int categoria = Integer.parseInt(request.getAttribute("categoria").toString());
+        String descripcion = request.getAttribute("descripcion").toString();
+        boolean nuevo, recomendado, visible;
         
-        String accion = request.getParameter("descripcion");
+        try{
+        nuevo= request.getAttribute("nuevo").toString().equalsIgnoreCase("on");
+        }catch(Exception e){
+        nuevo = false;
+        }
+            
+        try{
+        recomendado= request.getAttribute("recomendado").toString().equalsIgnoreCase("on");
+        }catch(Exception e){
+        recomendado = false;
+        }
+        
+        try{
+        visible= request.getAttribute("visible").toString().equalsIgnoreCase("on");
+        }catch(Exception e){
+        visible = false;
+        }
+        
+   
+        
+        String accion = request.getAttribute("accion").toString();
         
         ProductoTerminar producto = new ProductoTerminar();
         producto.setNombre(nombre);
@@ -108,11 +129,24 @@ public class ControlProducto extends HttpServlet {
         producto.setNuevo(nuevo);
         producto.setVisible(visible);
         
+        if(accion.equalsIgnoreCase("registrar")){
+            if (ProductoCad.registrarProducto(producto)){
+                request.setAttribute("mensaje", "<p style='color:green'>Producto registrado");
+             
+            } else{
+                request.setAttribute("mensaje", "<p style='color:red'>Producto no registrado");
+            }
+           
+        }else{
+             request.setAttribute("mensaje", "Accion desconocida");
+        }
+          request.getRequestDispatcher("admin").forward(request, response);
+
         //response.sendRedirect("foto/"+url);
         
     }
 
-    private String subirImagen(HttpServletRequest request){
+    private void recibirDatos(HttpServletRequest request){
         try {
             FileItemFactory fileFactory = new DiskFileItemFactory();
             
@@ -134,9 +168,10 @@ public class ControlProducto extends HttpServlet {
                     File imagen = new File(nuevoNombre);
                     if(item.getContentType().contains("image")){
                         item.write(imagen);
-                        request.setAttribute("subida", true);
-                        return nombre;
+                        request.setAttribute(item.getFieldName(), nombre);
                     }
+                }else{
+                    request.setAttribute(item.getFieldName(), item.getString());
                 }
             }
         } catch (FileUploadException ex) {
@@ -144,7 +179,6 @@ public class ControlProducto extends HttpServlet {
         } catch (Exception ex) {
             request.setAttribute("subida", false);
         }
-        return "";
     }
     
     /**
