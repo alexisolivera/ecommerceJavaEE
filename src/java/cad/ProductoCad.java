@@ -5,7 +5,6 @@
  */
 package cad;
 
-import JavaBeans.Categoria;
 import JavaBeans.ProductoTerminar;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -40,6 +39,31 @@ public class ProductoCad {
             
         } catch (SQLException ex) {
             return false;
+        }
+        
+    }
+    
+    public static ArrayList<ProductoTerminar> listarProductosRecomendados(String moneda){
+        try {
+            String sql= "{call sp_listarRecomendado(?)}";
+            Connection c=Conexion.conectar();
+            CallableStatement sentencia=c.prepareCall(sql);
+            sentencia.setString(1, moneda);
+            
+            
+            ResultSet res = sentencia.executeQuery();
+            ArrayList<ProductoTerminar> lista = new ArrayList<>();
+            while (res.next()) {
+                ProductoTerminar p = new ProductoTerminar();
+                p.setNombre(res.getString("nombre"));
+                p.setImg(res.getString("img"));
+                p.setPrecio(res.getFloat("precio"));
+                p.setPrecionuevo(res.getFloat("precionuevo"));
+                lista.add(p);
+            }
+            return lista;
+        } catch (SQLException ex) {
+            return null;
         }
         
     }
