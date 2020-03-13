@@ -157,7 +157,7 @@ public class ControlProducto extends HttpServlet {
             for(int i=0;i<items.size();i++){
                 FileItem item = (FileItem) items.get(i);
                 if(!item.isFormField()){
-                   String ruta = request.getServletContext().getRealPath("\\")+"foto\\";
+                   String ruta = request.getServletContext().getRealPath("/")+"/foto/";
                         SimpleDateFormat sdf = new SimpleDateFormat("ddMyyyyhhmmss");
                     String fecha = sdf.format(new Date());
                     nombre = fecha+new Random().nextLong()+item.getName();

@@ -45,8 +45,8 @@ public class CambiarMoneda extends HttpServlet {
                     sesion.setAttribute("nom_moneda", "$ Pesos Argentinos");
                     break;
                 default:
-                    sesion.setAttribute("moneda", ("MXN"));
-                    sesion.setAttribute("nom_moneda", "$ Pesos Mexicanos");
+                    sesion.setAttribute("moneda", ("ARG"));
+                    sesion.setAttribute("nom_moneda", "$ Pesos Argentinos");
                 break;
             }
         }

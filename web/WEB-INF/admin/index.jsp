@@ -63,10 +63,10 @@
                                         <input type="file" name="imagen" required />
                                         <hr/>
                                         <input class="btn btn-success" name="accion" type="submit" value="Registrar" />
-                                        <input class="btn btn-default" name="accion" type="submit" value="Consultar" />
+                                       <!-- <input class="btn btn-default" name="accion" type="submit" value="Consultar" />
                                         <input class="btn btn-warning" name="accion" type="submit" value="Actualizar" />
                                         <input class="btn btn-danger" name="accion" type="submit" value="Borrar" />
-                                        
+                                        -->
                                     </div>
 				</form>
 				</div>

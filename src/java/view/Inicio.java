@@ -32,8 +32,8 @@ public class Inicio extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession sesion = request.getSession();
         if(sesion.getAttribute("moneda")==null){
-            sesion.setAttribute("moneda", "MXN");
-            sesion.setAttribute("nom_moneda", "$ Pesos Mexicanos");
+            sesion.setAttribute("moneda", "ARS");
+            sesion.setAttribute("nom_moneda", "$ Pesos Argentinos");
         }
         if(request.getParameter("category")!= null){
             sesion.setAttribute("category", Integer.parseInt(request.getParameter("category")));

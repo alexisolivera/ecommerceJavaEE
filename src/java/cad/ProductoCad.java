@@ -43,6 +43,8 @@ public class ProductoCad {
         
     }
     
+    
+    
     public static ArrayList<ProductoTerminar> listarProductosRecomendados(){
         try {
             String sql= "{call sp_listarRecomendados()}";
@@ -55,6 +57,7 @@ public class ProductoCad {
             ArrayList<ProductoTerminar> lista = new ArrayList<>();
             while (res.next()) {
                 ProductoTerminar p = new ProductoTerminar();
+                p.setWebId(res.getString("webId"));
                 p.setNombre(res.getString("nombre"));
                 p.setImg(res.getString("img"));
                 p.setPrecio(res.getFloat("precio"));
@@ -83,6 +86,7 @@ public class ProductoCad {
             ArrayList<ProductoTerminar> lista = new ArrayList<>();
             while (res.next()) {
                 ProductoTerminar p = new ProductoTerminar();
+                p.setWebId(res.getString("webId"));
                 p.setNombre(res.getString("nombre"));
                 p.setImg(res.getString("img"));
                 p.setPrecio(res.getFloat("precio"));
@@ -110,6 +114,7 @@ public class ProductoCad {
             ArrayList<ProductoTerminar> lista = new ArrayList<>();
             while (res.next()) {
                 ProductoTerminar p = new ProductoTerminar();
+                p.setWebId(res.getString("webId"));
                 p.setNombre(res.getString("nombre"));
                 p.setImg(res.getString("img"));
                 p.setPrecio(res.getFloat("precio"));
@@ -119,6 +124,33 @@ public class ProductoCad {
                 lista.add(p);
             }
             return lista;
+        } catch (SQLException ex) {
+            return null;
+        }
+        
+    }
+    
+        public static ProductoTerminar consultarProducto(int webId){
+        try {
+            String sql= "{call sp_consultarProducto(?)}";
+            Connection c=Conexion.conectar();
+            CallableStatement sentencia=c.prepareCall(sql);
+            sentencia.setInt(1, webId);
+            
+            
+            ResultSet res = sentencia.executeQuery();
+            ProductoTerminar p = null;
+            if (res.next()) {
+                p = new ProductoTerminar();
+                p.setWebId(res.getString("webId"));
+                p.setNombre(res.getString("nombre"));
+                p.setImg(res.getString("img"));
+                p.setPrecio(res.getFloat("precio"));
+                p.setPrecionuevo(res.getFloat("precionuevo"));
+                p.setStock(res.getInt("stock"));
+                p.setNuevo(res.getBoolean("nuevo"));                
+            }
+            return p;
         } catch (SQLException ex) {
             return null;
         }

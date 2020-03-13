@@ -24,8 +24,7 @@
 
 <body>
     <%@include file="../WEB-INF/header.jsp" %>
-    <%@include file="../WEB-INF/slider.jsp" %>
-    <%@include file="../WEB-INF/confianza.jsp" %>
+  
 
         <section>
 		<div class="container">
@@ -63,7 +62,7 @@
 											<div class="overlay-content">
 												<h2>$<%= p.getPrecio()%></h2>
 												<p><%= p.getNombre() %></p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al carrito</a>
+												<a href="Cart?id=<%= p.getWebId()%>&action=order" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al carrito</a>
 											</div>
 										</div>
                                                                                                 <%if (p.isNuevo()) {%>

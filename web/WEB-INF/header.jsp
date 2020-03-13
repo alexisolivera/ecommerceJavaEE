@@ -11,8 +11,8 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> +*******</a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i> haolivera92@gmail.com</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i> 0341-4568928</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> administracion@luisitosport.com</a></li>
 							</ul>
 						</div>
 					</div>
@@ -36,7 +36,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+                                                    <a href="Home"><img src="images/home/logo.png" width="150px" /></a>
 						</div>
 
 						<div class="btn-group pull-right">
@@ -47,11 +47,8 @@
 								</button>
 								<ul class="dropdown-menu">
                                                            
-									<li><a href="CambiarMoneda?moneda=MXN">Pesos Mexicanos (MXN)</a></li>
-									<li><a href="CambiarMoneda?moneda=COP">Pesos Colombianos (COP)</a></li>
-                                                                        
-									<li><a href="CambiarMoneda?moneda=USD">Dolar (USA) (USD)</a></li>
-									<li><a href="CambiarMoneda?moneda=ARG">Pesos Argentinos (ARG)</a></li>
+									<li><a href="CambiarMoneda?moneda=MXN">Pesos Argentinos (ARG)</a></li>
+									
 								</ul>
 							</div>
 						</div>
@@ -60,8 +57,8 @@
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								<li><a href="#"><i class="fa fa-user"></i> Mi cuenta</a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i> Ver carrito</a></li>
-								<li><a href="#"><i class="fa fa-crosshairs"></i> Finalizar compra</a></li>
+								<li><a href="Cart"><i class="fa fa-shopping-cart"></i> Ver carrito</a></li>
+								<li><a href="Checkout"><i class="fa fa-crosshairs"></i> Finalizar compra</a></li>
 								<li><a href="#"><i class="fa fa-lock"></i> Acceder</a></li>
 							</ul>
 						</div>
@@ -72,42 +69,7 @@
 	
 		<div class="header-bottom"><!--header-bottom-->
 			<div class="container">
-				<div class="row">
-					<div class="col-sm-9">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-								<span class="sr-only">Navegación</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-						</div>
-                                            
-						<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="Home" class="active">Inicio</a></li>
-                                                                <li><a href="#">Todos los Productos</a></li>
-                                                                <li><a href="#">Ropa para Niños</a></li> 
-                                                                <li><a href="#">Blog</a></li>
-                                                                <li class="dropdown"><a href="#">Mi Compra<i class="fa fa-angle-down"></i></a>
-                                                                    <ul role="menu" class="sub-menu">
-                                                                        <li><a href="#">Finalizar compra</a></li> 
-                                                                        <li><a href="#">Ver carrito</a></li> 
-                                                                        <li><a href="#">Iniciar sesión</a></li> 
-                                                                    </ul>
-                                                                </li>
-                                                                <li><a href="#">Contacto</a></li>
-							</ul>
-						</div>
-                                            
-					</div>
-                                    <div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Buscar..."/>
-						</div>
-					</div>
-            	
-				</div>
+				
 			</div>
 		</div><!--/header-bottom-->
 	</header><!--/header-->

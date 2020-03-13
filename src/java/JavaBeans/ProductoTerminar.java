@@ -13,6 +13,7 @@ import java.lang.reflect.Constructor;
  * @author Alexis
  */
 public class ProductoTerminar implements Serializable{
+    private String webId;
     private String nombre;
     private float precio;
     private float precionuevo;
@@ -27,7 +28,15 @@ public class ProductoTerminar implements Serializable{
 
     public ProductoTerminar() {
     }
+    
+    public String getWebId() {
+        return webId;
+    }
 
+    public void setWebId(String webId) {
+        this.webId = webId;
+    }
+    
     public String getNombre() {
         return nombre;
     }
