@@ -43,12 +43,67 @@ public class ProductoCad {
         
     }
     
-    public static ArrayList<ProductoTerminar> listarProductosRecomendados(String moneda){
+    public static ArrayList<ProductoTerminar> listarProductosRecomendados(){
         try {
-            String sql= "{call sp_listarRecomendado(?)}";
+            String sql= "{call sp_listarRecomendados()}";
             Connection c=Conexion.conectar();
             CallableStatement sentencia=c.prepareCall(sql);
-            sentencia.setString(1, moneda);
+            //sentencia.setString(1, moneda);
+         
+            
+            ResultSet res = sentencia.executeQuery();
+            ArrayList<ProductoTerminar> lista = new ArrayList<>();
+            while (res.next()) {
+                ProductoTerminar p = new ProductoTerminar();
+                p.setNombre(res.getString("nombre"));
+                p.setImg(res.getString("img"));
+                p.setPrecio(res.getFloat("precio"));
+                p.setPrecionuevo(res.getFloat("precionuevo"));
+                p.setStock(res.getInt("stock"));
+                p.setNuevo(res.getBoolean("nuevo"));
+                lista.add(p);
+            }
+            return lista;
+        } catch (SQLException ex) {
+            return null;
+        }
+        
+    }
+    
+    
+    public static ArrayList<ProductoTerminar> listarProductoPorCategoria(int cat){
+        try {
+            String sql= "{call sp_listarPorCategoria(?)}";
+            Connection c=Conexion.conectar();
+            CallableStatement sentencia=c.prepareCall(sql);
+            sentencia.setInt(1, cat);
+         
+            
+            ResultSet res = sentencia.executeQuery();
+            ArrayList<ProductoTerminar> lista = new ArrayList<>();
+            while (res.next()) {
+                ProductoTerminar p = new ProductoTerminar();
+                p.setNombre(res.getString("nombre"));
+                p.setImg(res.getString("img"));
+                p.setPrecio(res.getFloat("precio"));
+                p.setPrecionuevo(res.getFloat("precionuevo"));
+                p.setStock(res.getInt("stock"));
+                p.setNuevo(res.getBoolean("nuevo"));
+                lista.add(p);
+            }
+            return lista;
+        } catch (SQLException ex) {
+            return null;
+        }
+        
+    }
+    
+    public static ArrayList<ProductoTerminar> listarProductoPorMarca(int marca){
+        try {
+            String sql= "{call sp_listarPorMarca(?)}";
+            Connection c=Conexion.conectar();
+            CallableStatement sentencia=c.prepareCall(sql);
+            sentencia.setInt(1, marca);
             
             
             ResultSet res = sentencia.executeQuery();
@@ -59,6 +114,8 @@ public class ProductoCad {
                 p.setImg(res.getString("img"));
                 p.setPrecio(res.getFloat("precio"));
                 p.setPrecionuevo(res.getFloat("precionuevo"));
+                p.setStock(res.getInt("stock"));
+                p.setNuevo(res.getBoolean("nuevo"));
                 lista.add(p);
             }
             return lista;
@@ -67,7 +124,6 @@ public class ProductoCad {
         }
         
     }
-    
     /*
  
 p_visible boolean,

@@ -4,7 +4,9 @@
     Author     : Alexis
 --%>
 
-					<div class="left-sidebar">
+					<%@page import="JavaBeans.Marca"%>
+<%@page import="cad.MarcaCad"%>
+<div class="left-sidebar">
 						<h2>Categorías</h2>
 						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
                                                     <%!
@@ -20,7 +22,7 @@
 									<h4 class="panel-title">
                                                                             <a <% if(CategoriaCad.esSuperior(codigo)) {%>data-toggle="collapse" data-parent="#accordian" <% } %> href="#<%= codigo %>">
 											 <% if(CategoriaCad.esSuperior(codigo)){ %><span class="badge pull-right"> <i class="fa fa-plus"></i></span> <% } %>
-                                                                                        <%= lista.get(i).getNombre() %>
+                                                                                         <a href="?category=<%=codigo%>"><%= lista.get(i).getNombre() %></a>
 										</a>
 									</h4>
 								</div>
@@ -32,7 +34,7 @@
                                                                                     for(int isub=0;listaSub.size()>isub;isub++){ 
                                                                                     codigo=listaSub.get(isub).getCodigo();
                                                                                 %>                                            
-                                                                                    <li><a href="#"><%= listaSub.get(isub).getNombre() %> </a></li>
+                                                                                    <li><a href="?category=<%=codigo%>"><%= listaSub.get(isub).getNombre() %> </a></li>
                                                                             <% } %>
                                                                             </ul>
 									</div>
@@ -46,12 +48,11 @@
 							<h2>Marcas</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-									<li><a href="#"> <span class="pull-right">(56)</span>Nike</a></li>
-									<li><a href="#"> <span class="pull-right">(27)</span>Adidas</a></li>
-									<li><a href="#"> <span class="pull-right">(32)</span>Polo</a></li>
-									<li><a href="#"> <span class="pull-right">(5)</span>Puma</a></li>
-									<li><a href="#"> <span class="pull-right">(9)</span>Boude</a></li>
-									<li><a href="#"> <span class="pull-right">(4)</span>ACB</a></li>
+                                                                    <%for(Marca m : MarcaCad.listarTodoDeMarcas()){ %>
+                                                                    
+                                                                    <% %>
+                                                                    <li><a href="?brand=<%=m.getCodigo()%>"> <span class="pull-right">(<%=MarcaCad.contarMarcas(m.getCodigo())%>)</span><%=m.getNombre()%></a></li>
+                                                                        <%}%>
 								</ul>
 							</div>
 						</div><!--/brands_products-->

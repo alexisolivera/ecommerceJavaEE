@@ -5,13 +5,14 @@
  */
 package JavaBeans;
 
+import java.io.Serializable;
 import java.lang.reflect.Constructor;
 
 /**
  *
  * @author Alexis
  */
-public class ProductoTerminar {
+public class ProductoTerminar implements Serializable{
     private String nombre;
     private float precio;
     private float precionuevo;

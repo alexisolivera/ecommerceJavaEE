@@ -96,19 +96,19 @@ public class ControlProducto extends HttpServlet {
         boolean nuevo, recomendado, visible;
         
         try{
-        nuevo= request.getAttribute("nuevo").toString().equalsIgnoreCase("on");
+        nuevo = request.getAttribute("nuevo").toString().equalsIgnoreCase("on");
         }catch(Exception e){
         nuevo = false;
         }
             
         try{
-        recomendado= request.getAttribute("recomendado").toString().equalsIgnoreCase("on");
+        recomendado = request.getAttribute("recomendado").toString().equalsIgnoreCase("on");
         }catch(Exception e){
         recomendado = false;
         }
         
         try{
-        visible= request.getAttribute("visible").toString().equalsIgnoreCase("on");
+        visible = request.getAttribute("visible").toString().equalsIgnoreCase("on");
         }catch(Exception e){
         visible = false;
         }
@@ -118,6 +118,7 @@ public class ControlProducto extends HttpServlet {
         String accion = request.getAttribute("accion").toString();
         
         ProductoTerminar producto = new ProductoTerminar();
+        producto.setImg(url);
         producto.setNombre(nombre);
         producto.setPrecio(precio);
         producto.setPrecionuevo(precion);
@@ -156,8 +157,8 @@ public class ControlProducto extends HttpServlet {
             for(int i=0;i<items.size();i++){
                 FileItem item = (FileItem) items.get(i);
                 if(!item.isFormField()){
-                   String ruta = request.getServletContext().getRealPath("/")+"foto/";
-                    SimpleDateFormat sdf = new SimpleDateFormat("ddMyyyyhhmmss");
+                   String ruta = request.getServletContext().getRealPath("\\")+"foto\\";
+                        SimpleDateFormat sdf = new SimpleDateFormat("ddMyyyyhhmmss");
                     String fecha = sdf.format(new Date());
                     nombre = fecha+new Random().nextLong()+item.getName();
                     String nuevoNombre = ruta+nombre;

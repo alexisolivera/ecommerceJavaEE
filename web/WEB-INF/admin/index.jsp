@@ -57,10 +57,10 @@
                                         </textarea>
                                         <hr/>
                                         Nuevo?<input type="checkbox" name="nuevo" value="ON" checked="checked" style="margin-right: 10px"/>
-                                        Recomendado?<input type="checkbox" name="recomendado" value="OFF" style="margin-right: 10px"/>
+                                        Recomendado?<input type="checkbox" name="recomendado" value="ON" style="margin-right: 10px"/>
                                         Visible?<input type="checkbox" name="visible" value="ON" checked="checked" />
                                         <hr/>
-                                        <input type="file" name="imagen" value="Seleccionar una imagen" required />
+                                        <input type="file" name="imagen" required />
                                         <hr/>
                                         <input class="btn btn-success" name="accion" type="submit" value="Registrar" />
                                         <input class="btn btn-default" name="accion" type="submit" value="Consultar" />

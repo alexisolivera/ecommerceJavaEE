@@ -1,10 +1,14 @@
 
 <%@page import="cad.ProductoCad"%>
-<%@page import="JavaBeans.Categoria"%>
 <%@page import="cad.CategoriaCad"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="cad.MarcaCad"%>
+<%@page import="JavaBeans.Marca"%>
+<%@page import="JavaBeans.Categoria"%>
+<%@page import="JavaBeans.ProductoTerminar"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,12 +18,15 @@
     <meta name="author" content="">
     <title>Inicio |  e-Commerce desarrollado por Alexis Olivera</title>
     <%@include file="../WEB-INF/css.jsp" %>
+    
+    
 </head><!--/head-->
 
 <body>
     <%@include file="../WEB-INF/header.jsp" %>
     <%@include file="../WEB-INF/slider.jsp" %>
     <%@include file="../WEB-INF/confianza.jsp" %>
+
         <section>
 		<div class="container">
 			<div class="row">
@@ -29,33 +36,53 @@
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Productos destacados</h2>
-                                                <c:forEach var="p" items="<%= ProductoCad.listarProductosRecomendados(session.getAttribute("moneda").toString())%>">
+                                                <%! ArrayList<ProductoTerminar> datos; %>
+                                                <% if (Integer.parseInt(session.getAttribute("category").toString())>0){
+                                                    datos = ProductoCad.listarProductoPorCategoria(Integer.parseInt(session.getAttribute("category").toString()));
+                                                }else if (Integer.parseInt(session.getAttribute("brand").toString())>0){
+                                                    datos = ProductoCad.listarProductoPorMarca(Integer.parseInt(session.getAttribute("brand").toString()));
+                                                }else{
+                                                    datos = ProductoCad.listarProductosRecomendados();
+                                                } %>
+                                                <% for (ProductoTerminar p : datos){%>
                                                 <div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
 										<div class="productinfo text-center">
-											<img src="foto/{" alt="" />
-											<h2>$56</h2>
-											<p>Blusa Polo color negro</p>
+											<img src="foto/<%=p.getImg()%>" alt="" />
+                                                                                        <h2 <%if (p.getStock()==0) {%>
+                                                                                                class="gris"
+                                                                                            <%}
+                                                                                            %>>$<%= p.getPrecio()%> </h2>
+											<p> <%= p.getNombre() %></p>
 											<span class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al carrito</span>
 										</div>
-										<div class="product-overlay">
+										<div class="product-overlay <%if (p.getStock()==0) {%>
+                                                                                                grisfondo
+                                                                                            <%}%> ">
 											<div class="overlay-content">
-												<h2>$56</h2>
-												<p>Blusa Polo color negro</p>
+												<h2>$<%= p.getPrecio()%></h2>
+												<p><%= p.getNombre() %></p>
 												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al carrito</a>
 											</div>
 										</div>
+                                                                                                <%if (p.isNuevo()) {%>
+                                                                                                <img src="images/home/new.png" class="new" alt="producto nuevo" />
+                                                                                                <%}%>
 								</div>
 								<div class="choose">
 									<ul class="nav nav-pills nav-justified">
 										<li><a href=""><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-check-circle"></i>Disponible</a></li>
+										<%if (p.getStock()==0) {%>
+                                                                                                <li><a href="#"><i class="fa fa-check-circle"></i>Agotado</a></li>
+                                                                                            <%} else {%>  <li><a href="#"><i class="fa fa-check-circle"></i>(<%= p.getStock()%>)Disponible</a></li> <%}%>
+                                                                                            
+                                                                                
 									</ul>
 								</div>
 							</div>
 						</div>
-					</c:forEach>	
+                                        <%}%>
 					</div><!--features_items-->
 					
 					<div class="category-tab"><!--category-tab-->
