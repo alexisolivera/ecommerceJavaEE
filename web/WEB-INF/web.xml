@@ -40,6 +40,14 @@
         <servlet-name>CartController</servlet-name>
         <url-pattern>/Cart</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Delete</servlet-name>
+        <servlet-class>view.Delete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Delete</servlet-name>
+        <url-pattern>/Delete</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

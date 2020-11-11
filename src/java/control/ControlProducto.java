@@ -5,7 +5,7 @@
  */
 package control;
 
-import JavaBeans.ProductoTerminar;
+import JavaBeans.Producto;
 import cad.ProductoCad;
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -117,7 +116,7 @@ public class ControlProducto extends HttpServlet {
         
         String accion = request.getAttribute("accion").toString();
         
-        ProductoTerminar producto = new ProductoTerminar();
+        Producto producto = new Producto();
         producto.setImg(url);
         producto.setNombre(nombre);
         producto.setPrecio(precio);
@@ -138,7 +137,8 @@ public class ControlProducto extends HttpServlet {
                 request.setAttribute("mensaje", "<p style='color:red'>Producto no registrado");
             }
            
-        }else{
+        }
+        else {
              request.setAttribute("mensaje", "Accion desconocida");
         }
           request.getRequestDispatcher("admin").forward(request, response);

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.omg.CORBA.SystemException;
 
 /**
  *
@@ -43,8 +44,11 @@ public class Inicio extends HttpServlet {
             sesion.setAttribute("category", 0);
             sesion.setAttribute("brand", 0);
         }
-        
-        request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
+        try{
+        request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);    
+        } catch(SystemException e){
+            System.out.println("view.Inicio.processRequest()");
+        }
         }
     
 

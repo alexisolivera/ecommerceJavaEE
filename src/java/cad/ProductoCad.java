@@ -5,24 +5,32 @@
  */
 package cad;
 
-import JavaBeans.ProductoTerminar;
+import JavaBeans.Producto;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Alexis
  */
 public class ProductoCad {
-    
-    public static boolean registrarProducto(ProductoTerminar producto){
+
+    /*
+    Esta clase nos ofrece los metodos necesarios para interactuar
+    con la base de datos.
+    */
+    public static boolean registrarProducto(Producto producto) {
         try {
-            String sql= "{call sp_registrarproducto(?,?,?,?,?,?,?,?,?,?,?)}";
-            Connection c=Conexion.conectar();
-            CallableStatement sentencia=c.prepareCall(sql);
+            String sql = "{call sp_registrarproducto(?,?,?,?,?,?,?,?,?,?,?)}";
+            Connection c = Conexion.conectar();
+            CallableStatement sentencia = c.prepareCall(sql);
+            //La sentencia prepara el statement que sera ejecutado luego de reemplazar
+            // cada ? por los atributos seteados a continuacion.
             sentencia.setString(1, producto.getNombre());
             sentencia.setFloat(2, producto.getPrecio());
             sentencia.setFloat(3, producto.getPrecionuevo());
@@ -34,29 +42,27 @@ public class ProductoCad {
             sentencia.setInt(9, producto.getCodigo_marca());
             sentencia.setInt(10, producto.getCodigo_categoria());
             sentencia.setString(11, producto.getImg());
-            
-            return sentencia.executeUpdate()>0;
-            
+            // si la sentencia afecta al menos una tupla de la tabla, el statement nos va a devolver verdadero
+            // y asi sabemos que fue exitosa.
+            return sentencia.executeUpdate() > 0;
+
         } catch (SQLException ex) {
             return false;
         }
-        
+
     }
-    
-    
-    
-    public static ArrayList<ProductoTerminar> listarProductosRecomendados(){
+
+    public static ArrayList<Producto> listarProductosRecomendados() {
         try {
-            String sql= "{call sp_listarRecomendados()}";
-            Connection c=Conexion.conectar();
-            CallableStatement sentencia=c.prepareCall(sql);
+            String sql = "{call sp_listarRecomendados()}";
+            Connection c = Conexion.conectar();
+            CallableStatement sentencia = c.prepareCall(sql);
             //sentencia.setString(1, moneda);
-         
-            
+
             ResultSet res = sentencia.executeQuery();
-            ArrayList<ProductoTerminar> lista = new ArrayList<>();
+            ArrayList<Producto> lista = new ArrayList<>();
             while (res.next()) {
-                ProductoTerminar p = new ProductoTerminar();
+                Producto p = new Producto();
                 p.setWebId(res.getString("webId"));
                 p.setNombre(res.getString("nombre"));
                 p.setImg(res.getString("img"));
@@ -70,22 +76,20 @@ public class ProductoCad {
         } catch (SQLException ex) {
             return null;
         }
-        
+
     }
-    
-    
-    public static ArrayList<ProductoTerminar> listarProductoPorCategoria(int cat){
+
+    public static ArrayList<Producto> listarProductoPorCategoria(int cat) {
         try {
-            String sql= "{call sp_listarPorCategoria(?)}";
-            Connection c=Conexion.conectar();
-            CallableStatement sentencia=c.prepareCall(sql);
+            String sql = "{call sp_listarPorCategoria(?)}";
+            Connection c = Conexion.conectar();
+            CallableStatement sentencia = c.prepareCall(sql);
             sentencia.setInt(1, cat);
-         
-            
+
             ResultSet res = sentencia.executeQuery();
-            ArrayList<ProductoTerminar> lista = new ArrayList<>();
+            ArrayList<Producto> lista = new ArrayList<>();
             while (res.next()) {
-                ProductoTerminar p = new ProductoTerminar();
+                Producto p = new Producto();
                 p.setWebId(res.getString("webId"));
                 p.setNombre(res.getString("nombre"));
                 p.setImg(res.getString("img"));
@@ -99,21 +103,20 @@ public class ProductoCad {
         } catch (SQLException ex) {
             return null;
         }
-        
+
     }
-    
-    public static ArrayList<ProductoTerminar> listarProductoPorMarca(int marca){
+
+    public static ArrayList<Producto> listarProductoPorMarca(int marca) {
         try {
-            String sql= "{call sp_listarPorMarca(?)}";
-            Connection c=Conexion.conectar();
-            CallableStatement sentencia=c.prepareCall(sql);
+            String sql = "{call sp_listarPorMarca(?)}";
+            Connection c = Conexion.conectar();
+            CallableStatement sentencia = c.prepareCall(sql);
             sentencia.setInt(1, marca);
-            
-            
+
             ResultSet res = sentencia.executeQuery();
-            ArrayList<ProductoTerminar> lista = new ArrayList<>();
+            ArrayList<Producto> lista = new ArrayList<>();
             while (res.next()) {
-                ProductoTerminar p = new ProductoTerminar();
+                Producto p = new Producto();
                 p.setWebId(res.getString("webId"));
                 p.setNombre(res.getString("nombre"));
                 p.setImg(res.getString("img"));
@@ -127,40 +130,62 @@ public class ProductoCad {
         } catch (SQLException ex) {
             return null;
         }
-        
+
     }
-    
-        public static ProductoTerminar consultarProducto(int webId){
+
+    public static Producto consultarProducto(int webId) {
         try {
-            String sql= "{call sp_consultarProducto(?)}";
-            Connection c=Conexion.conectar();
-            CallableStatement sentencia=c.prepareCall(sql);
+            String sql = "{call sp_consultarProducto(?)}";
+            Connection c = Conexion.conectar();
+            CallableStatement sentencia = c.prepareCall(sql);
             sentencia.setInt(1, webId);
-            
-            
             ResultSet res = sentencia.executeQuery();
-            ProductoTerminar p = null;
+            Producto p = null;
             if (res.next()) {
-                p = new ProductoTerminar();
+                p = new Producto();
                 p.setWebId(res.getString("webId"));
                 p.setNombre(res.getString("nombre"));
                 p.setImg(res.getString("img"));
                 p.setPrecio(res.getFloat("precio"));
                 p.setPrecionuevo(res.getFloat("precionuevo"));
                 p.setStock(res.getInt("stock"));
-                p.setNuevo(res.getBoolean("nuevo"));                
+                p.setNuevo(res.getBoolean("nuevo"));
             }
             return p;
         } catch (SQLException ex) {
             return null;
         }
-        
+
     }
+
     /*
  
 p_visible boolean,
 p_codigo_marca int,
 p_codigo_categoria int,
 p_img varchar(100)
-    */
+     */
+    public static ArrayList<Producto> listarTodosLosProductos() {
+        try {
+            String sql = "{call sp_ListarTodosLosProductos}";
+            Connection connection = Conexion.conectar();
+            CallableStatement sentencia = connection.prepareCall(sql);
+            ResultSet result = sentencia.executeQuery();
+            ArrayList<Producto> allProducts = new ArrayList<>();
+            while (result.next()) {
+                Producto p = new Producto();
+                p.setWebId(result.getString("webId"));
+                p.setNombre(result.getString("nombre"));
+                p.setImg(result.getString("img"));
+                p.setPrecio(result.getFloat("precio"));
+                p.setPrecionuevo(result.getFloat("precionuevo"));
+                p.setStock(result.getInt("stock"));
+                p.setNuevo(result.getBoolean("nuevo"));
+                allProducts.add(p);
+            }
+            return allProducts;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
 }

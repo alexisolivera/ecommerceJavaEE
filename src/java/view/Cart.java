@@ -6,7 +6,7 @@
 package view;
 
 import JavaBeans.Item;
-import JavaBeans.ProductoTerminar;
+import JavaBeans.Producto;
 import cad.ProductoCad;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,52 +34,52 @@ public class Cart extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(request.getParameter("action")!= null){
-            String a = request.getParameter("action");
+        if (request.getParameter("action") != null) {
+            String action = request.getParameter("action");
             int webId = Integer.parseInt(request.getParameter("id"));
-            ProductoTerminar p;
+            Producto producto;
             HttpSession session = request.getSession();
-            if (a.equals("order")){
-                if(session.getAttribute("cart")==null){
+            if (action.equals("order")) {
+                if (session.getAttribute("cart") == null) {
                     ArrayList<Item> cart = new ArrayList<>();
-                    p = ProductoCad.consultarProducto(webId);
-                    cart.add(new Item(p, 1));
+                    producto = ProductoCad.consultarProducto(webId);
+                    cart.add(new Item(producto, 1));
                     session.setAttribute("cart", cart);
-                }else{
-                    ArrayList<Item> cart = (ArrayList<Item>)session.getAttribute("cart");
-                   int indice = yaExisteProducto(webId, cart);
-                   if (indice == -1){
-                      p = ProductoCad.consultarProducto(webId);
-                    cart.add(new Item(p, 1)); 
-                   }else{
-                       int cantidad=cart.get(indice).getCantidad()+1;
-                       cart.get(indice).setCantidad(cantidad);
-                   }
-                    
-                    session.setAttribute("cart", cart);
+                } else {
+                    ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
+                    int indice = yaExisteProducto(webId, cart);
+                    if (indice == -1) {
+                        producto = ProductoCad.consultarProducto(webId);
+                        cart.add(new Item(producto, 1));
+                    } else {
+                        int cantidad = cart.get(indice).getCantidad() + 1;
+                        cart.get(indice).setCantidad(cantidad);
                     }
-                }else if (a.equals("delete")){
-                   ArrayList<Item> cart = (ArrayList<Item>)session.getAttribute("cart");
-                   int indice = yaExisteProducto(webId, cart);
-                   cart.remove(indice);
-                }else if (a.equals("resta")){
-                    ArrayList<Item> cart = (ArrayList<Item>)session.getAttribute("cart");
-                   int indice = yaExisteProducto(webId, cart);
-                int cantidad = cart.get(indice).getCantidad()-1;
-                   cart.get(indice).setCantidad(cantidad);
-                   session.setAttribute("cart", cart);
+
+                    session.setAttribute("cart", cart);
                 }
-            
+            } else if (action.equals("delete")) {
+                ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
+                int indice = yaExisteProducto(webId, cart);
+                cart.remove(indice);
+            } else if (action.equals("resta")) {
+                ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
+                int indice = yaExisteProducto(webId, cart);
+                int cantidad = cart.get(indice).getCantidad() - 1;
+                cart.get(indice).setCantidad(cantidad);
+                session.setAttribute("cart", cart);
+            }
+
         }
-        
+
         response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher("WEB-INF/cart.jsp").forward(request, response);
-    
+
     }
-    
-    private int yaExisteProducto(int webId, ArrayList<Item> cart){
-        for (int i= 0; i<cart.size();i++){
-            if(Integer.parseInt(cart.get(i).getP().getWebId())== webId){
+
+    private int yaExisteProducto(int webId, ArrayList<Item> cart) {
+        for (int i = 0; i < cart.size(); i++) {
+            if (Integer.parseInt(cart.get(i).getP().getWebId()) == webId) {
                 return i;
             }
         }

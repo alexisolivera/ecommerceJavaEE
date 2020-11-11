@@ -5,7 +5,7 @@
 <%@page import="cad.MarcaCad"%>
 <%@page import="JavaBeans.Marca"%>
 <%@page import="JavaBeans.Categoria"%>
-<%@page import="JavaBeans.ProductoTerminar"%>
+<%@page import="JavaBeans.Producto"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -35,7 +35,7 @@
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Productos destacados</h2>
-                                                <%! ArrayList<ProductoTerminar> datos; %>
+                                                <%! ArrayList<Producto> datos; %>
                                                 <% if (Integer.parseInt(session.getAttribute("category").toString())>0){
                                                     datos = ProductoCad.listarProductoPorCategoria(Integer.parseInt(session.getAttribute("category").toString()));
                                                 }else if (Integer.parseInt(session.getAttribute("brand").toString())>0){
@@ -43,7 +43,7 @@
                                                 }else{
                                                     datos = ProductoCad.listarProductosRecomendados();
                                                 } %>
-                                                <% for (ProductoTerminar p : datos){%>
+                                                <% for (Producto p : datos){%>
                                                 <div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">

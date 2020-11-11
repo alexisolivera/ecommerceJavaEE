@@ -12,7 +12,7 @@ import java.lang.reflect.Constructor;
  *
  * @author Alexis
  */
-public class ProductoTerminar implements Serializable{
+public class Producto implements Serializable{
     private String webId;
     private String nombre;
     private float precio;
@@ -26,7 +26,7 @@ public class ProductoTerminar implements Serializable{
     private int codigo_categoria;
     private String img;
 
-    public ProductoTerminar() {
+    public Producto() {
     }
     
     public String getWebId() {
