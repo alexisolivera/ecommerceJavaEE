@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Gestion de productos |  e-Commerce desarrollado por Alexis Olivera</title>
+    <title>Gestion de productos</title>
     <%@include file="../../WEB-INF/css.jsp" %>
 </head><!--/head-->
 
@@ -65,10 +65,13 @@
                                         <input class="btn btn-success" name="accion" type="submit" value="Registrar" />
                                         <input class="btn btn-warning" name="update" type="submit" value="Actualizar" />
                                        <input class="btn btn-default" name="accion" type="submit" value="Consultar" />
-                                        <input class="btn btn-danger" name="accion" type="submit" value="Borrar" />
+                                        
                                        
                                     </div>
 				</form>
+                                            <form action="Delete" enctype="multipart/form-data" method="post">
+                                                <input class="btn btn-warning" name="update" type="submit" value="Delete" />
+                                            </form>
 				</div>
 			</div>
 		</div>

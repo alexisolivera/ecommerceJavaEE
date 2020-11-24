@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package control;
 
+import JavaBeans.Usuario;
+import cad.IniciarSesionCad;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alexis
  */
-
-public class Delete extends HttpServlet {
+public class IniciarSesion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,9 +32,6 @@ public class Delete extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("WEB-INF/admin/delete.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,7 +60,15 @@ public class Delete extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String nombreUsuario = request.getParameter("usuario");
+        String clave = request.getParameter("clave");
+        Usuario usuario = new Usuario(nombreUsuario, clave);
+        boolean sesionExitosa = IniciarSesionCad.autentificarUsuario(usuario);
+        if(sesionExitosa){
+            request.getRequestDispatcher("WEB-INF/admin/index.jsp").forward(request, response);
+        }else{
+            System.out.println("control.IniciarSesion.doPost()");
+        }
     }
 
     /**

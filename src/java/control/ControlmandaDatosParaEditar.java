@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package control;
 
+import JavaBeans.Producto;
+import cad.ProductoCad;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alexis
  */
-
-public class Delete extends HttpServlet {
+//@WebServlet(name = "ControlmandaDatosParaEditar", urlPatterns = {"/ControlmandaDatosParaEditar"})
+public class ControlmandaDatosParaEditar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,9 +34,49 @@ public class Delete extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("WEB-INF/admin/delete.jsp").forward(request, response);
+        String codigo = request.getParameter("codigo");
+        String nombre = request.getParameter("nombre");
+        float precio = Float.parseFloat(request.getParameter("precio"));
+        float precion = Float.parseFloat(request.getParameter("precionuevo"));
+        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+        int marca = Integer.parseInt(request.getParameter("marca"));
+        int categoria = Integer.parseInt(request.getParameter("categoria"));
+        String descripcion = request.getParameter("descripcion");
+        boolean nuevo, recomendado, visible;
+        
+        try{
+        nuevo = request.getParameter("nuevo").equalsIgnoreCase("on");
+        }catch(Exception e){
+        nuevo = false;
+        }
+            
+        try{
+        recomendado = request.getParameter("recomendado").equalsIgnoreCase("on");
+        }catch(Exception e){
+        recomendado = false;
+        }
+        
+        try{
+        visible = request.getParameter("visible").equalsIgnoreCase("on");
+        }catch(Exception e){
+        visible = false;
+        }
+        
+        Producto producto = new Producto();
+        producto.setWebId(codigo);
+        producto.setNombre(nombre);
+        producto.setPrecio(precio);
+        producto.setPrecionuevo(precion);
+        producto.setStock(cantidad);
+        producto.setCodigo_marca(marca);
+        producto.setCodigo_categoria(categoria);
+        producto.setDescripcion(descripcion);
+        producto.setRecomendado(recomendado);
+        producto.setNuevo(nuevo);
+        producto.setVisible(visible);
+        if(ProductoCad.editarProducto(producto)){
+            request.getRequestDispatcher("WEB-INF/admin/editProduct.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

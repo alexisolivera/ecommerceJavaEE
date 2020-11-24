@@ -6,7 +6,6 @@
 package JavaBeans;
 
 import java.io.Serializable;
-import java.lang.reflect.Constructor;
 
 /**
  *
@@ -124,6 +123,4 @@ public class Producto implements Serializable{
     public void setImg(String img) {
         this.img = img;
     }
-   
-    
 }

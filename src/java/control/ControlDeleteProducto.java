@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package control;
 
+import cad.ProductoCad;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alexis
  */
-
-public class Delete extends HttpServlet {
+public class ControlDeleteProducto extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,8 +32,13 @@ public class Delete extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("WEB-INF/admin/delete.jsp").forward(request, response);
+        String accion = request.getParameter("accion");
+        if (accion.equalsIgnoreCase("borrar")) {
+            int webId = Integer.parseInt(request.getParameter("allProducts"));
+            if(ProductoCad.borrarProducto(webId)){
+             response.sendRedirect("Delete");
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -48,6 +48,30 @@
         <servlet-name>Delete</servlet-name>
         <url-pattern>/Delete</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProduct</servlet-name>
+        <url-pattern>/EditProduct</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EditProduct</servlet-name>
+        <servlet-class>view.EditProduct</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ControlEditarProducto</servlet-name>
+        <url-pattern>/ControlEditarProducto</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ControlEditarProducto</servlet-name>
+        <servlet-class>control.ControlEditarProducto</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ControlmandaDatosParaEditar</servlet-name>
+        <url-pattern>/ControlmandaDatosParaEditar</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ControlmandaDatosParaEditar</servlet-name>
+        <servlet-class>control.ControlmandaDatosParaEditar</servlet-class>
+    </servlet>
     <session-config>
         <session-timeout>
             30
