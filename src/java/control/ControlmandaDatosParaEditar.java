@@ -34,48 +34,54 @@ public class ControlmandaDatosParaEditar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String codigo = request.getParameter("codigo");
-        String nombre = request.getParameter("nombre");
-        float precio = Float.parseFloat(request.getParameter("precio"));
-        float precion = Float.parseFloat(request.getParameter("precionuevo"));
-        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-        int marca = Integer.parseInt(request.getParameter("marca"));
-        int categoria = Integer.parseInt(request.getParameter("categoria"));
-        String descripcion = request.getParameter("descripcion");
-        boolean nuevo, recomendado, visible;
-        
-        try{
-        nuevo = request.getParameter("nuevo").equalsIgnoreCase("on");
-        }catch(Exception e){
-        nuevo = false;
-        }
-            
-        try{
-        recomendado = request.getParameter("recomendado").equalsIgnoreCase("on");
-        }catch(Exception e){
-        recomendado = false;
-        }
-        
-        try{
-        visible = request.getParameter("visible").equalsIgnoreCase("on");
-        }catch(Exception e){
-        visible = false;
-        }
-        
-        Producto producto = new Producto();
-        producto.setWebId(codigo);
-        producto.setNombre(nombre);
-        producto.setPrecio(precio);
-        producto.setPrecionuevo(precion);
-        producto.setStock(cantidad);
-        producto.setCodigo_marca(marca);
-        producto.setCodigo_categoria(categoria);
-        producto.setDescripcion(descripcion);
-        producto.setRecomendado(recomendado);
-        producto.setNuevo(nuevo);
-        producto.setVisible(visible);
-        if(ProductoCad.editarProducto(producto)){
-            request.getRequestDispatcher("WEB-INF/admin/editProduct.jsp").forward(request, response);
+        Object isLogged = request.getSession().getAttribute("sesionExitosa");
+        if (isLogged != null && (Boolean) isLogged) {
+            String codigo = request.getParameter("codigo");
+            String nombre = request.getParameter("nombre");
+            float precio = Float.parseFloat(request.getParameter("precio"));
+            float precion = Float.parseFloat(request.getParameter("precionuevo"));
+            int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+            int marca = Integer.parseInt(request.getParameter("marca"));
+            int categoria = Integer.parseInt(request.getParameter("categoria"));
+            String descripcion = request.getParameter("descripcion");
+            boolean nuevo, recomendado, visible;
+
+            try {
+                nuevo = request.getParameter("nuevo").equalsIgnoreCase("on");
+            } catch (Exception e) {
+                nuevo = false;
+            }
+
+            try {
+                recomendado = request.getParameter("recomendado").equalsIgnoreCase("on");
+            } catch (Exception e) {
+                recomendado = false;
+            }
+
+            try {
+                visible = request.getParameter("visible").equalsIgnoreCase("on");
+            } catch (Exception e) {
+                visible = false;
+            }
+
+            Producto producto = new Producto();
+            producto.setWebId(codigo);
+            producto.setNombre(nombre);
+            producto.setPrecio(precio);
+            producto.setPrecionuevo(precion);
+            producto.setStock(cantidad);
+            producto.setCodigo_marca(marca);
+            producto.setCodigo_categoria(categoria);
+            producto.setDescripcion(descripcion);
+            producto.setRecomendado(recomendado);
+            producto.setNuevo(nuevo);
+            producto.setVisible(visible);
+            if (ProductoCad.editarProducto(producto)) {
+                request.getRequestDispatcher("WEB-INF/admin/editProduct.jsp").forward(request, response);
+            }
+
+        } else {
+            request.getRequestDispatcher("WEB-INF/admin/login.jsp").forward(request, response);
         }
     }
 

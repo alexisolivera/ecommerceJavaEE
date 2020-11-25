@@ -72,6 +72,30 @@
         <servlet-name>ControlmandaDatosParaEditar</servlet-name>
         <servlet-class>control.ControlmandaDatosParaEditar</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>view.Login</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IniciarSesion</servlet-name>
+        <url-pattern>/IniciarSesion</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>IniciarSesion</servlet-name>
+        <servlet-class>control.IniciarSesion</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PanelAdmin</servlet-name>
+        <url-pattern>/PanelAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>PanelAdmin</servlet-name>
+        <servlet-class>view.PanelAdmin</servlet-class>
+    </servlet>
     <session-config>
         <session-timeout>
             30

@@ -89,7 +89,7 @@
 					<div class="total_area">
 						<ul>
                                                     <li>Sub Total <span>$<%=asd%></span></li>
-							<li>Tax/IVA(21%) <span><%=asd*0.21%></span></li>
+							<li>IVA(21%) <span><%=asd*0.21%></span></li>
                                                         <li><h3>Total <span>$<%=asd*1.21%></span></h3></li>
 						</ul>
                                             <a class="btn btn-default update" href="Home">Seguir comprando</a>

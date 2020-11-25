@@ -28,7 +28,7 @@
 				<div class="col-sm-3">
 				</div>
 				<div class="col-sm-10 clearfix">
-                                   ${mensaje}
+                                   
                                     <h3>Gestionar producto</h3>
                                     <form action="ControlProducto" enctype="multipart/form-data" method="post">
                                     <div class="form-one">

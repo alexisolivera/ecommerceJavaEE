@@ -34,12 +34,17 @@ public class ControlEditarProducto extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        Object isLogged = request.getSession().getAttribute("sesionExitosa");
+        if(isLogged!=null && (Boolean)isLogged){
         PrintWriter out = response.getWriter();
         int webId = Integer.parseInt(request.getParameter("id"));
         HttpSession session = request.getSession();
         Producto p = ProductoCad.consultarProductoAeditar(webId);
         session.setAttribute("productoAeditar", p);
         request.getRequestDispatcher("WEB-INF/admin/formularioEditorProducto.jsp").forward(request, response);
+        }else{
+        request.getRequestDispatcher("WEB-INF/admin/login.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -49,4 +49,18 @@ public class MarcaCad {
             return 0;
         }
     }
+    
+    public static String obtenerMarca(int cat) {
+        try {
+            String sql = "{call sp_obtenerMarca(?)}";
+            Connection c = Conexion.conectar();
+            CallableStatement sentencia = c.prepareCall(sql);
+            sentencia.setInt(1, cat);
+            ResultSet resultado = sentencia.executeQuery();
+            resultado.next();
+            return resultado.getString("nombre");
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
 }

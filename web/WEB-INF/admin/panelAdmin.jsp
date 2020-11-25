@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,12 +12,9 @@
     <body>
         
         <%@include file="../../WEB-INF/header.jsp" %>
-        <form action="IniciarSesion" method="post">
-            <label> Nombre: </label>
-            <input type="text" name="usuario"><br>
-            <label> Contraseña: </label>
-            <input type="password" name="clave"><br>
-            <input type="submit" value="Iniciar Sesion">
-        </form>
+        <a href="EditProduct" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>VER / EDITAR</a>
+        <a href="Delete" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>ELIMINAR</a>
+        <a href="admin" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>NUEVO</a>
+        <a href="CerrarSesion" class="btn btn-default add-to-cart"><i class="fa fa-lock"></i>CERRAR SESION</a>
     </body>
 </html>

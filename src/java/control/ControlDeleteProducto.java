@@ -32,12 +32,17 @@ public class ControlDeleteProducto extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String accion = request.getParameter("accion");
-        if (accion.equalsIgnoreCase("borrar")) {
-            int webId = Integer.parseInt(request.getParameter("allProducts"));
-            if(ProductoCad.borrarProducto(webId)){
-             response.sendRedirect("Delete");
+        Object isLogged = request.getSession().getAttribute("sesionExitosa");
+        if (isLogged != null && (Boolean) isLogged) {
+            String accion = request.getParameter("accion");
+            if (accion.equalsIgnoreCase("borrar")) {
+                int webId = Integer.parseInt(request.getParameter("allProducts"));
+                if (ProductoCad.borrarProducto(webId)) {
+                    response.sendRedirect("Delete");
+                }
             }
+        } else {
+            request.getRequestDispatcher("WEB-INF/admin/login.jsp").forward(request, response);
         }
     }
 

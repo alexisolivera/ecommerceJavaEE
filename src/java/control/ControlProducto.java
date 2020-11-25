@@ -47,7 +47,7 @@ public class ControlProducto extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControlProducto</title>");            
+            out.println("<title>Servlet ControlProducto</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ControlProducto at " + request.getContextPath() + "</h1>");
@@ -82,96 +82,98 @@ public class ControlProducto extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        recibirDatos(request);
-        
-        String url = request.getAttribute("imagen").toString();
-        String nombre = request.getAttribute("nombre").toString();
-        float precio = Float.parseFloat(request.getAttribute("precio").toString());
-        float precion = Float.parseFloat(request.getAttribute("precionuevo").toString());
-        int cantidad = Integer.parseInt(request.getAttribute("cantidad").toString());
-        int marca = Integer.parseInt(request.getAttribute("marca").toString());
-        int categoria = Integer.parseInt(request.getAttribute("categoria").toString());
-        String descripcion = request.getAttribute("descripcion").toString();
-        boolean nuevo, recomendado, visible;
-        
-        try{
-        nuevo = request.getAttribute("nuevo").toString().equalsIgnoreCase("on");
-        }catch(Exception e){
-        nuevo = false;
-        }
-            
-        try{
-        recomendado = request.getAttribute("recomendado").toString().equalsIgnoreCase("on");
-        }catch(Exception e){
-        recomendado = false;
-        }
-        
-        try{
-        visible = request.getAttribute("visible").toString().equalsIgnoreCase("on");
-        }catch(Exception e){
-        visible = false;
-        }
-        
-   
-        
-        String accion = request.getAttribute("accion").toString();
-        
-        Producto producto = new Producto();
-        producto.setImg(url);
-        producto.setNombre(nombre);
-        producto.setPrecio(precio);
-        producto.setPrecionuevo(precion);
-        producto.setStock(cantidad);
-        producto.setCodigo_marca(marca);
-        producto.setCodigo_categoria(categoria);
-        producto.setDescripcion(descripcion);
-        producto.setRecomendado(recomendado);
-        producto.setNuevo(nuevo);
-        producto.setVisible(visible);
-        
-        if(accion.equalsIgnoreCase("registrar")){
-            if (ProductoCad.registrarProducto(producto)){
-                request.setAttribute("mensaje", "<p style='color:green'>Producto registrado");
-             
-            } else{
-                request.setAttribute("mensaje", "<p style='color:red'>Producto no registrado");
-            }
-           
-        }
-        else {
-             request.setAttribute("mensaje", "Accion desconocida");
-        }
-          request.getRequestDispatcher("admin").forward(request, response);
+        Object isLogged = request.getSession().getAttribute("sesionExitosa");
+        if (isLogged != null && (Boolean) isLogged) {
 
+            recibirDatos(request);
+
+            String url = request.getAttribute("imagen").toString();
+            String nombre = request.getAttribute("nombre").toString();
+            float precio = Float.parseFloat(request.getAttribute("precio").toString());
+            float precion = Float.parseFloat(request.getAttribute("precionuevo").toString());
+            int cantidad = Integer.parseInt(request.getAttribute("cantidad").toString());
+            int marca = Integer.parseInt(request.getAttribute("marca").toString());
+            int categoria = Integer.parseInt(request.getAttribute("categoria").toString());
+            String descripcion = request.getAttribute("descripcion").toString();
+            boolean nuevo, recomendado, visible;
+
+            try {
+                nuevo = request.getAttribute("nuevo").toString().equalsIgnoreCase("on");
+            } catch (Exception e) {
+                nuevo = false;
+            }
+
+            try {
+                recomendado = request.getAttribute("recomendado").toString().equalsIgnoreCase("on");
+            } catch (Exception e) {
+                recomendado = false;
+            }
+
+            try {
+                visible = request.getAttribute("visible").toString().equalsIgnoreCase("on");
+            } catch (Exception e) {
+                visible = false;
+            }
+
+            String accion = request.getAttribute("accion").toString();
+
+            Producto producto = new Producto();
+            producto.setImg(url);
+            producto.setNombre(nombre);
+            producto.setPrecio(precio);
+            producto.setPrecionuevo(precion);
+            producto.setStock(cantidad);
+            producto.setCodigo_marca(marca);
+            producto.setCodigo_categoria(categoria);
+            producto.setDescripcion(descripcion);
+            producto.setRecomendado(recomendado);
+            producto.setNuevo(nuevo);
+            producto.setVisible(visible);
+
+            if (accion.equalsIgnoreCase("registrar")) {
+                if (ProductoCad.registrarProducto(producto)) {
+                    request.setAttribute("mensaje", "<p style='color:green'>Producto registrado");
+
+                } else {
+                    request.setAttribute("mensaje", "<p style='color:red'>Producto no registrado");
+                }
+
+            } else {
+                request.setAttribute("mensaje", "Accion desconocida");
+            }
+            request.getRequestDispatcher("admin").forward(request, response);
+        } else {
+            request.getRequestDispatcher("WEB-INF/admin/login.jsp").forward(request, response);
+        }
         //response.sendRedirect("foto/"+url);
-        
+
     }
 
-    private void recibirDatos(HttpServletRequest request){
+    private void recibirDatos(HttpServletRequest request) {
         try {
             FileItemFactory fileFactory = new DiskFileItemFactory();
-            
+
             ServletFileUpload servletUpload = new ServletFileUpload(fileFactory);
             String nombre = "";
             List items = servletUpload.parseRequest(request);
-            for(int i=0;i<items.size();i++){
+            for (int i = 0; i < items.size(); i++) {
                 FileItem item = (FileItem) items.get(i);
-                if(!item.isFormField()){
-                   String ruta = request.getServletContext().getRealPath("/")+"/foto/";
-                        SimpleDateFormat sdf = new SimpleDateFormat("ddMyyyyhhmmss");
+                if (!item.isFormField()) {
+                    String ruta = request.getServletContext().getRealPath("/") + "/foto/";
+                    SimpleDateFormat sdf = new SimpleDateFormat("ddMyyyyhhmmss");
                     String fecha = sdf.format(new Date());
-                    nombre = fecha+new Random().nextLong()+item.getName();
-                    String nuevoNombre = ruta+nombre;
+                    nombre = fecha + new Random().nextLong() + item.getName();
+                    String nuevoNombre = ruta + nombre;
                     File folder = new File(ruta);
-                    if(!folder.exists()){
+                    if (!folder.exists()) {
                         folder.mkdirs();
                     }
                     File imagen = new File(nuevoNombre);
-                    if(item.getContentType().contains("image")){
+                    if (item.getContentType().contains("image")) {
                         item.write(imagen);
                         request.setAttribute(item.getFieldName(), nombre);
                     }
-                }else{
+                } else {
                     request.setAttribute(item.getFieldName(), item.getString());
                 }
             }
@@ -181,7 +183,7 @@ public class ControlProducto extends HttpServlet {
             request.setAttribute("subida", false);
         }
     }
-    
+
     /**
      * Returns a short description of the servlet.
      *

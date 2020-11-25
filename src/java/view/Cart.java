@@ -52,10 +52,12 @@ public class Cart extends HttpServlet {
                         producto = ProductoCad.consultarProducto(webId);
                         cart.add(new Item(producto, 1));
                     } else {
-                        int cantidad = cart.get(indice).getCantidad() + 1;
-                        cart.get(indice).setCantidad(cantidad);
+                        producto = ProductoCad.consultarProducto(webId);
+                        if (producto.getStock() >= (cart.get(indice).getCantidad() + 1)) {
+                            int cantidad = cart.get(indice).getCantidad() + 1;
+                            cart.get(indice).setCantidad(cantidad);
+                        }
                     }
-
                     session.setAttribute("cart", cart);
                 }
             } else if (action.equals("delete")) {
@@ -65,9 +67,11 @@ public class Cart extends HttpServlet {
             } else if (action.equals("resta")) {
                 ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
                 int indice = yaExisteProducto(webId, cart);
-                int cantidad = cart.get(indice).getCantidad() - 1;
-                cart.get(indice).setCantidad(cantidad);
-                session.setAttribute("cart", cart);
+                if (cart.get(indice).getCantidad() > 0) {
+                    int cantidad = cart.get(indice).getCantidad() - 1;
+                    cart.get(indice).setCantidad(cantidad);
+                    session.setAttribute("cart", cart);
+                }
             }
 
         }

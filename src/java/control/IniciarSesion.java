@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -53,7 +54,15 @@ public class IniciarSesion extends HttpServlet {
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
-     * @param response servlet response
+     * @param response servlet responseString nombreUsuario = request.getParameter("usuario");
+        String clave = request.getParameter("clave");
+        Usuario usuario = new Usuario(nombreUsuario, clave);
+        boolean sesionExitosa = IniciarSesionCad.autentificarUsuario(usuario);
+        if(sesionExitosa){
+            request.getRequestDispatcher("WEB-INF/admin/panelAdmin.jsp").forward(request, response);
+        }else{
+            System.out.println("control.IniciarSesion.doPost()");
+        }
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -65,7 +74,10 @@ public class IniciarSesion extends HttpServlet {
         Usuario usuario = new Usuario(nombreUsuario, clave);
         boolean sesionExitosa = IniciarSesionCad.autentificarUsuario(usuario);
         if(sesionExitosa){
-            request.getRequestDispatcher("WEB-INF/admin/index.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            session.setAttribute("sesionExitosa", true);
+            session.setAttribute("nombreDeUsuario", nombreUsuario);
+            request.getRequestDispatcher("WEB-INF/admin/panelAdmin.jsp").forward(request, response);
         }else{
             System.out.println("control.IniciarSesion.doPost()");
         }

@@ -25,12 +25,11 @@
                     <div class="col-sm-3">
                     </div>
                     <div class="col-sm-10 clearfix">
-                        
                         <h3>Gestionar producto</h3>
                         <form action="ControlEditarProducto" method="post">
-                            <div class="form-one">
-                                <table>
-                                    <thead>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="">
                                         <tr>
                                             <td>Codigo</td>
                                             <td>Nombre<td>
@@ -41,8 +40,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <%! ArrayList<Producto> productos = ProductoCad.listarTodosLosProductosIncluyeEliminados();%>
-                                        <% for (Producto p : productos) {%>
+                                        <% for (Producto p : ProductoCad.listarTodosLosProductosIncluyeEliminados()) {%>
                                         <tr>
                                             <td><%=p.getWebId()%></td>
                                             <td><%=p.getNombre()%><td>

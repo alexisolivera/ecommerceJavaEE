@@ -150,7 +150,7 @@
 			<div class="container">
 				<div class="row">
 					<p class="pull-left">Copyright © 2020 . Todos los derechos reservados.</p>
-					<p class="pull-right"><span>Desarrollado por Alexis Olivera</span></p>
+					<p class="pull-right"><span>Desarrollado por Nestor Sanchez y Alexis Olivera</span></p>
 				</div>
 			</div>
 		</div>
