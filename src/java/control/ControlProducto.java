@@ -130,7 +130,7 @@ public class ControlProducto extends HttpServlet {
             producto.setNuevo(nuevo);
             producto.setVisible(visible);
 
-            if (accion.equalsIgnoreCase("registrar")) {
+            if (accion.equalsIgnoreCase("Cargar")) {
                 if (ProductoCad.registrarProducto(producto)) {
                     request.setAttribute("mensaje", "<p style='color:green'>Producto registrado");
 

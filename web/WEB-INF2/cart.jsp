@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Inicio |  e-Commerce desarrollado por Alexis Olivera</title>
+    <title>Carrito de compras</title>
     <%@include file="../WEB-INF/css.jsp" %>
     
     
@@ -42,9 +42,6 @@
 					<tbody>
                                             <% ArrayList<Item> itemsList = (ArrayList<Item>)session.getAttribute("cart"); 
                                             float asd = 0;
-                                            if(itemsList== null){
-                                                return;
-                                            }
                                              for (Item i : itemsList){
                                                 asd = asd + i.getP().getPrecio() * i.getCantidad();%>
                                                 <tr> 

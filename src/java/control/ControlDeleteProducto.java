@@ -35,7 +35,7 @@ public class ControlDeleteProducto extends HttpServlet {
         Object isLogged = request.getSession().getAttribute("sesionExitosa");
         if (isLogged != null && (Boolean) isLogged) {
             String accion = request.getParameter("accion");
-            if (accion.equalsIgnoreCase("borrar")) {
+            if (accion.equalsIgnoreCase("eliminar")) {
                 int webId = Integer.parseInt(request.getParameter("allProducts"));
                 if (ProductoCad.borrarProducto(webId)) {
                     response.sendRedirect("Delete");

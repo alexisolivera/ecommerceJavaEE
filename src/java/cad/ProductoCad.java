@@ -156,7 +156,7 @@ public class ProductoCad {
 
     }
 
-        public static Producto consultarProductoAeditar(int webId) {
+    public static Producto consultarProductoAeditar(int webId) {
         try {
             String sql = "{call sp_consultarProductoAeditar(?)}";
             Connection c = Conexion.conectar();
@@ -183,6 +183,7 @@ public class ProductoCad {
         }
 
     }
+
     /*
  
 p_visible boolean,
@@ -227,7 +228,7 @@ p_img varchar(100)
         return false;
 
     }
-    
+
     public static boolean editarProducto(Producto producto) {
         try {
             String sql = "{call sp_editarProducto(?,?,?,?,?,?,?,?,?,?,?)}";
@@ -256,7 +257,8 @@ p_img varchar(100)
         }
 
     }
-public static ArrayList<Producto> listarTodosLosProductosIncluyeEliminados() {
+
+    public static ArrayList<Producto> listarTodosLosProductosIncluyeEliminados() {
         try {
             String sql = "{call sp_ListarTodosLosProductosIncluyeEliminados()}";
             Connection connection = Conexion.conectar();
@@ -281,5 +283,16 @@ public static ArrayList<Producto> listarTodosLosProductosIncluyeEliminados() {
         }
     }
 
+    public static boolean cambiarStock(int webId, int stock) {
+        try {
+            String sql = "{call sp_cambiarStock(?,?)}";
+            Connection connection = Conexion.conectar();
+            CallableStatement sentencia = connection.prepareCall(sql);
+            sentencia.setInt(1, webId);
+            sentencia.setInt(2, stock);
+            return sentencia.executeUpdate() > 0;
+        } catch (Exception e) {
+        }
+        return false;
+    }
 }
-

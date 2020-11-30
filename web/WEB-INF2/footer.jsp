@@ -7,6 +7,78 @@
 	<footer id="footer"><!--Footer-->
 		<div class="footer-top">
 			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						
+					</div>
+					<div class="col-sm-7">
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="images/home/iframe1.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Marcas caseras</p>
+								<h2>24 DIC 2019</h2>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="images/home/iframe2.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Mujeres elegantes</p>
+								<h2>24 DIC 2019</h2>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="images/home/iframe3.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Ropa ejecutiva</p>
+								<h2>24 DIC 2018</h2>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="images/home/iframe4.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Promociones</p>
+								<h2>24 MAR 2018</h2>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="address">
+							<img src="images/home/map.png" alt="" />
+							<p>Con un e-Commerce nuestra ubicación es el mundo.</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		
@@ -28,7 +100,7 @@
 						<div class="single-widget">
 							<h2>Compra rápida</h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Ropa Deportiva</a></li>
+								<li><a href="#">Camisetas</a></li>
 								<li><a href="#">Hombre</a></li>
 								<li><a href="#">Mujeres</a></li>
 								<li><a href="#">Tarjetas de Regalo</a></li>
@@ -59,12 +131,7 @@
 							</ul>
 						</div>
 					</div>
-                                    <div class="col-sm-3 col-sm-offset-1">
-                                        <div class="single-widget">
-                                            
-                                        </div>
-                                        </div>
-				<!---	<div class="col-sm-3 col-sm-offset-1">
+					<div class="col-sm-3 col-sm-offset-1">
 						<div class="single-widget">
 							<h2>Suscripción</h2>
 							<form action="#" class="searchform">
@@ -73,7 +140,7 @@
 								<p>Obtenga las actualizaciones más recientes de nuestro sitio y productos en promoción.</p>
 							</form>
 						</div>
-					</div> -->
+					</div>
 					
 				</div>
 			</div>

@@ -13,54 +13,38 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Gestion de productos</title>
+        <title>Consulta de artículos</title>
         <%@include file="../../WEB-INF/css.jsp" %>
     </head><!--/head-->
-
     <body>
         <%@include file="../../WEB-INF/header.jsp" %>
-        <section>
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-3">
-                    </div>
-                    <div class="col-sm-10 clearfix">
-                        <h3>Gestionar producto</h3>
-                        <form action="ControlEditarProducto" method="post">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead class="">
-                                        <tr>
-                                            <td>Codigo</td>
-                                            <td>Nombre<td>
-                                            <td>Precio</td>
-                                            <td>Disponible</td>
-                                            <td>Descripcion</td>
-                                            <td>Editar</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for (Producto p : ProductoCad.listarTodosLosProductosIncluyeEliminados()) {%>
-                                        <tr>
-                                            <td><%=p.getWebId()%></td>
-                                            <td><%=p.getNombre()%><td>
-                                            <td><%=p.getPrecio()%></td>
-                                            <td><%=p.getStock()%></td>
-                                            <td><%=p.getDescripcion()%></td>
-                                            <td><a href="ControlEditarProducto?id=<%= p.getWebId()%>&value=aEditar" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Editar</a></td>
-                                            <td></td>
-                                        </tr>
-                                        <%}%> 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
+                <h3>Consulta de artículos</h3><br>
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Codigo</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Descripcion detallada</th>
+                        <th scope="col">Editar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% for (Producto p : ProductoCad.listarTodosLosProductosIncluyeEliminados()) {%>
+                      <tr>
+                        <th scope="row"><%=p.getWebId()%></th>
+                        <td><%=p.getNombre()%></td>
+                        <td><%=p.getPrecio()%></td>
+                        <td><%=p.getStock()%></td>
+                        <td><%=p.getDescripcion()%></td>
+                        <td><a href="ControlEditarProducto?id=<%= p.getWebId()%>&value=aEditar" class="btn btn-default"><i class="fa fa-edit"></i> Editar</a></td>
+                      </tr>
+                      <%}%>
+                    </tbody>
+                  </table>
+                  <a href="PanelAdmin" class="btn btn-default"><i class="fa fa-caret-left"></i> Volver</a><br><br>
             </div>
-        </section>
-        <%@include file="../../WEB-INF/footer.jsp" %>
-        <%@include file="../../WEB-INF/js.jsp" %>                                    
     </body>
 </html>

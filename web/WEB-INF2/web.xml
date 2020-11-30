@@ -96,14 +96,6 @@
         <servlet-name>PanelAdmin</servlet-name>
         <servlet-class>view.PanelAdmin</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>ControlDeleteProducto</servlet-name>
-        <url-pattern>/ControlDeleteProducto</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ControlDeleteProducto</servlet-name>
-        <servlet-class>control.ControlDeleteProducto</servlet-class>
-    </servlet>
     <session-config>
         <session-timeout>
             30

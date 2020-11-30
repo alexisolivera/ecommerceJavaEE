@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Inicio | Deportes Luisito</title>
+    <title>Inicio |  e-Commerce desarrollado por Alexis Olivera</title>
     <%@include file="../WEB-INF/css.jsp" %>
     
     
@@ -54,18 +54,13 @@
 							<div class="product-image-wrapper">
 								<div class="single-products">
 										<div class="productinfo text-center">
-											<img src="foto/<%=p.getImg()%>" alt="" width="100" height="200" />
+											<img src="foto/<%=p.getImg()%>" alt="" />
                                                                                         <h2 <%if (p.getStock()==0) {%>
                                                                                                 class="gris"
-                                                                                            style="text-decoration: line-through"                                                                                         
                                                                                             <%}
                                                                                             %>>$<%= p.getPrecio()%> </h2>
 											<p> <%= p.getNombre() %></p>
-                                                                                        <%if (p.getStock()>0) {%>
-                                                                                                <span class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al carrito</span>
-                                                                                            <%}else{%>
-                                                                                            <span class="btn btn-default add-to-cart"><i class="fa fa-ban"></i>AGOTADO</span>
-                                                                                                    <%}%>
+											<span class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al carrito</span>
 										</div>
 										<div class="product-overlay <%if (p.getStock()==0) {%>
                                                                                                 grisfondo
@@ -73,11 +68,7 @@
 											<div class="overlay-content">
 												<h2>$<%= p.getPrecio()%></h2>
 												<p><%= p.getNombre() %></p>
-                                                                                                <%if (p.getStock()>0) {%>
-                                                                                               <a href="Cart?id=<%= p.getWebId()%>&action=order" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al carrito</a>
-                                                                                            <%}else{%>
-                                                                                            <span class="btn btn-default add-to-cart"><i class="fa fa-ban"></i>AGOTADO</span>
-                                                                                            <%}%>
+												<a href="Cart?id=<%= p.getWebId()%>&action=order" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al carrito</a>
 											</div>
 										</div>
                                                                                                 <%if (p.isNuevo()) {%>

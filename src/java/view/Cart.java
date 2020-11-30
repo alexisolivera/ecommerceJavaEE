@@ -36,7 +36,11 @@ public class Cart extends HttpServlet {
             throws ServletException, IOException {
         if (request.getParameter("action") != null) {
             String action = request.getParameter("action");
-            int webId = Integer.parseInt(request.getParameter("id"));
+            String idParameter = request.getParameter("id");
+            int webId = 999999999;
+            if (idParameter != null) {
+                webId = Integer.parseInt(idParameter);
+            }
             Producto producto;
             HttpSession session = request.getSession();
             if (action.equals("order")) {
@@ -71,6 +75,23 @@ public class Cart extends HttpServlet {
                     int cantidad = cart.get(indice).getCantidad() - 1;
                     cart.get(indice).setCantidad(cantidad);
                     session.setAttribute("cart", cart);
+                }
+            } else if (action.equals("finalize")) {
+                ArrayList<Item> cart = (ArrayList<Item>) session.getAttribute("cart");
+                boolean todoBien = false;
+                for (Item item : cart) {
+                    Producto p = item.getP();
+                    String webId1 = p.getWebId();
+                    int parsewebId = Integer.parseInt(webId1);
+                    int stock = p.getStock();
+                    int cantidad = item.getCantidad();
+                    int newStock = stock - cantidad;
+                    todoBien = ProductoCad.cambiarStock(parsewebId, newStock);
+                }
+                if (todoBien) {
+                    cart.clear();
+                    session.setAttribute("cart", cart);
+                    request.getRequestDispatcher("WEB-INF/graciasPorTuCompra.jsp").forward(request, response);
                 }
             }
 
