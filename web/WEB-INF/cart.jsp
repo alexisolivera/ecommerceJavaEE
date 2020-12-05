@@ -49,7 +49,7 @@
                                                 asd = asd + i.getP().getPrecio() * i.getCantidad();%>
                                                 <tr> 
 							<td class="cart_product">
-                                                            <a href=""><img src="foto/<%=i.getP().getImg()%>" alt=""></a>
+                                                            <a href=""><img src="foto/<%=i.getP().getImg()%>" alt="" width="100" height="150"></a>
 							</td>
 							<td class="cart_description">
 								<h4><a href=""><%=i.getP().getNombre()%></a></h4>

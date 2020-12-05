@@ -104,6 +104,14 @@
         <servlet-name>ControlDeleteProducto</servlet-name>
         <servlet-class>control.ControlDeleteProducto</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>GraciasPorTuCompra</servlet-name>
+        <url-pattern>/GraciasPorTuCompra</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>GraciasPorTuCompra</servlet-name>
+        <servlet-class>view.GraciasPorTuCompra</servlet-class>
+    </servlet>
     <session-config>
         <session-timeout>
             30

@@ -91,7 +91,7 @@ public class Cart extends HttpServlet {
                 if (todoBien) {
                     cart.clear();
                     session.setAttribute("cart", cart);
-                    request.getRequestDispatcher("WEB-INF/graciasPorTuCompra.jsp").forward(request, response);
+                    request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
                 }
             }
 

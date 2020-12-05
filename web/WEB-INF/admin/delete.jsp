@@ -22,7 +22,7 @@
         <div class="container">
             <form action="ControlDeleteProducto" method="post">
                 <h3>Eliminar artículo</h3>
-                <select name="allProducts">
+                <select name="allProducts" class="form-control">
                     <option>Seleccione el artículo a eliminar</option>
                     <% for (Producto p : ProductoCad.listarTodosLosProductos()) {%>
                     <option value="<%= p.getWebId()%>"><%=p.getNombre()%></option>
